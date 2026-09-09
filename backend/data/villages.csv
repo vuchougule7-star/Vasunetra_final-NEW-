@@ -1,0 +1,8 @@
+village,slope,rainfall,population,access_score,latitude,longitude,vulnerability_index,shelter_capacity,safe_zone_access,safe_zone,safe_zone_lat,safe_zone_lon,safe_zone_distance_km,capacity_pressure,land_change
+Sialsuk,0.82,0.75,152,0.4,23.72,92.65,0.72,420.0,0.64,Sialsuk Community Relief Centre,23.725,92.658,2.4,0.3619047619047619,0.146
+Zohmun,0.55,0.6,210,0.6,23.78,92.63,0.55,380.0,0.58,Zohmun Emergency Shelter,23.785,92.637,1.9,0.5526315789473685,
+Thenzawl,0.48,0.65,95,0.5,23.32,92.73,0.48,260.0,0.48,Thenzawl Community Safety Centre,23.325,92.735,2.1,0.3653846153846153,
+Reiek,0.2,0.3,180,0.8,23.76,92.57,0.2,300.0,0.82,Reiek Community Shelter,23.765,92.575,3.0,0.6,
+Aizawl_Rural1,0.7,0.55,300,0.3,23.74,92.72,0.7,650.0,0.34,Aizawl Rural Relief Centre,23.748,92.728,1.6,0.4615384615384615,
+Aizawl_Rural2,0.35,0.4,120,0.7,23.78,92.7,0.35,310.0,0.72,Aizawl Rural Safety Centre,23.786,92.706,2.7,0.3870967741935484,
+Lungdai,0.65,0.7,189,0.45,23.55,92.67,0.65,240.0,0.46,Lungdai Emergency Shelter,23.556,92.676,2.2,0.7875,

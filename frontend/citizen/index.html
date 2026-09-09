@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vasunetra | Citizen Safety Dashboard</title>
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🌍</div>
+
+            <div>
+                <h2>VASUNETRA</h2>
+                <span>Citizen Safety Portal</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#risk">Risk Status</a>
+            <a href="#map-section">Map</a>
+            <a href="#alerts">Alerts</a>
+        </nav>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </header>
+
+
+    <!-- ================= MOBILE MENU ================= -->
+
+    <div id="mobileMenu" class="mobile-menu">
+
+        <a href="#home">Home</a>
+        <a href="#risk">Risk Status</a>
+        <a href="#map-section">Map</a>
+        <a href="#alerts">Alerts</a>
+
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    🛡️ Disaster Safety Information
+                </div>
+
+                <h1>
+                    Stay Safe.<br>
+                    <span>Stay Informed.</span>
+                </h1>
+
+                <p>
+                    Check your area's current risk status,
+                    receive important alerts and find the
+                    nearest safe zone.
+                </p>
+
+
+                <!-- LOCATION SELECTOR -->
+
+                <div class="location-box">
+
+                    <label for="villageSelect">
+                        📍 Select your area
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select id="villageSelect" onchange="changeVillage()">
+
+                            <option value="village1">
+                                Shillong Village
+                            </option>
+
+                            <option value="village2">
+                                Cherrapunji Village
+                            </option>
+
+                            <option value="village3">
+                                Guwahati Area
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="earth">
+                    🌍
+                </div>
+
+                <h3>
+                    Vasunetra
+                </h3>
+
+                <p>
+                    Your community safety companion
+                </p>
+
+                <div class="mini-stats">
+
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Monitoring</span>
+                    </div>
+
+                    <div>
+                        <strong>📍</strong>
+                        <span>Safe Zones</span>
+                    </div>
+
+                    <div>
+                        <strong>🔔</strong>
+                        <span>Alerts</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RISK SECTION ================= -->
+
+        <section class="section" id="risk">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="small-title">
+                        CURRENT CONDITION
+                    </span>
+
+                    <h2>
+                        Your Area Risk Status
+                    </h2>
+                </div>
+
+                <span class="updated">
+                    Last updated:
+                    <b id="lastUpdated">
+                        05 Sep 2026
+                    </b>
+                </span>
+
+            </div>
+
+
+            <div class="risk-grid">
+
+
+                <!-- RISK CARD -->
+
+                <div class="risk-card medium" id="riskCard">
+
+                    <div class="risk-top">
+
+                        <div>
+
+                            <span class="card-label">
+                                CURRENT RISK
+                            </span>
+
+                            <h3 id="riskTitle">
+                                MEDIUM
+                            </h3>
+
+                        </div>
+
+                        <div class="risk-icon" id="riskIcon">
+                            ⚠️
+                        </div>
+
+                    </div>
+
+
+                    <p id="riskDescription">
+
+                        Moderate risk conditions detected.
+                        Residents should stay alert and
+                        monitor official updates.
+
+                    </p>
+
+
+                    <div class="risk-meter">
+
+                        <div
+                            class="meter-fill"
+                            id="meterFill"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="meter-labels">
+
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONDITIONS -->
+
+                <div class="conditions-card">
+
+                    <h3>
+                        Current Conditions
+                    </h3>
+
+                    <div class="condition">
+
+                        <div class="condition-icon">
+                            🌧️
+                        </div>
+
+                        <div>
+                            <strong>Rainfall</strong>
+                            <span id="rainfall">
+                                Moderate
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="condition">
+
+                        <div class="condition-icon">
+                            ⛰️
+                        </div>
+
+                        <div>
+                            <strong>Terrain</strong>
+                            <span id="terrain">
+                                Hilly
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="condition">
+
+                        <div class="condition-icon">
+                            🏞️
+                        </div>
+
+                        <div>
+                            <strong>Land Change</strong>
+                            <span id="landChange">
+                                Detected
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ALERT ================= -->
+
+        <section class="section" id="alerts">
+
+            <div class="alert-box">
+
+                <div class="alert-icon">
+                    ⚠️
+                </div>
+
+                <div class="alert-content">
+
+                    <span class="alert-label">
+                        IMPORTANT ALERT
+                    </span>
+
+                    <h3>
+                        Stay alert during heavy rainfall
+                    </h3>
+
+                    <p id="alertText">
+
+                        Heavy rainfall may increase local
+                        disaster risk. Avoid unnecessary
+                        travel near vulnerable slopes.
+
+                    </p>
+
+                </div>
+
+                <button
+                    class="alert-button"
+                    onclick="showAlertDetails()"
+                >
+                    View Details
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MAP ================= -->
+
+        <section class="section" id="map-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="small-title">
+                        SAFETY MAP
+                    </span>
+
+                    <h2>
+                        Find Your Safe Zone
+                    </h2>
+
+                </div>
+
+                <span class="map-info">
+                    📍 Demo map
+                </span>
+
+            </div>
+
+
+            <div class="map-container">
+
+                <div id="map"></div>
+
+            </div>
+
+
+            <div class="map-actions">
+
+                <button
+                    class="primary-btn"
+                    onclick="findSafeZone()"
+                >
+                    🛟 Find Nearest Safe Zone
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="reportIssue()"
+                >
+                    📢 Report an Issue
+                </button>
+
+            </div>
+
+
+            <!-- SAFE ZONE RESULT -->
+
+            <div
+                id="safeZoneResult"
+                class="safe-zone-result hidden"
+            >
+
+                <div class="safe-icon">
+                    🛟
+                </div>
+
+                <div>
+
+                    <span>
+                        NEAREST SAFE ZONE
+                    </span>
+
+                    <h3 id="safeZoneName">
+                        Community Relief Centre
+                    </h3>
+
+                    <p id="safeZoneDistance">
+                        Approximately 2.4 km away
+                    </p>
+
+                </div>
+
+                <button onclick="showRoute()">
+                    View Route →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="small-title">
+                        QUICK ACTIONS
+                    </span>
+
+                    <h2>
+                        What do you need?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions-grid">
+
+                <div
+                    class="action-card"
+                    onclick="findSafeZone()"
+                >
+
+                    <div class="action-icon">
+                        🛟
+                    </div>
+
+                    <h3>
+                        Find Safe Zone
+                    </h3>
+
+                    <p>
+                        Locate the nearest designated
+                        safe area.
+                    </p>
+
+                    <span>
+                        Find location →
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="action-card"
+                    onclick="reportIssue()"
+                >
+
+                    <div class="action-icon">
+                        📢
+                    </div>
+
+                    <h3>
+                        Report an Issue
+                    </h3>
+
+                    <p>
+                        Report a visible hazard or
+                        local problem.
+                    </p>
+
+                    <span>
+                        Report now →
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="action-card"
+                    onclick="showEmergency()"
+                >
+
+                    <div class="action-icon">
+                        🚨
+                    </div>
+
+                    <h3>
+                        Emergency Help
+                    </h3>
+
+                    <p>
+                        View emergency guidance and
+                        important contacts.
+                    </p>
+
+                    <span>
+                        Get help →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            🌍 VASUNETRA
+        </div>
+
+        <p>
+            Disaster Management Decision-Support System
+        </p>
+
+        <span>
+            Prototype • SIH 2026
+        </span>
+
+    </footer>
+
+
+    <!-- Leaflet JS -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>

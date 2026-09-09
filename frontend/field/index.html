@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vasunetra — Field Analysis</title>
+<style>
+:root{
+  --bg:#090b0e;--panel:#101419;--panel2:#171b20;--panel3:#0b0e11;--line:#30373d;
+  --text:#f4f6f8;--muted:#9ba5ad;--blue:#24a9ff;--red:#ff4141;--orange:#ff9d1b;
+  --green:#35d45f;--cyan:#49bcff;--shadow:0 14px 34px rgba(0,0,0,.36)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Segoe UI,Inter,Arial,sans-serif;background:radial-gradient(circle at 30% 0,#182026 0,#0b0e11 44%,#060708 100%);color:var(--text)}
+body{padding:10px}
+.app{min-height:calc(100vh - 20px);border:1px solid #24292e;border-radius:4px;overflow:hidden;background:rgba(8,10,12,.97);box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.topbar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #252a2f;background:#111418}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}.badge{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#eef3f6,#6e767e);color:#111;font-size:11px;font-weight:800}.actions{display:flex;gap:22px;color:#b8c0c7;font-size:18px}
+main{padding:16px 16px 10px}.sitebar{display:flex;align-items:center;gap:10px;margin-bottom:14px}.sitebar label{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#b9c2c9;font-weight:700}.sitebar select{background:#151a1f;color:#edf2f4;border:1px solid #3a434b;border-radius:4px;padding:8px 11px;min-width:250px}.site-note{font-size:11px;color:#758089}
+.grid-top{display:grid;grid-template-columns:1.05fr 1.05fr 1.12fr;gap:12px}.grid-mid{display:grid;grid-template-columns:1.08fr 1.1fr 1.2fr;gap:12px;margin-top:12px}.card{border:1px solid #343b42;background:linear-gradient(180deg,#101417,#0d1114);box-shadow:var(--shadow)}
+.card-title{padding:8px 10px;color:var(--blue);font-weight:800;font-size:15px;letter-spacing:.15px;text-transform:uppercase;border-bottom:1px solid #2b3238}.image-card .content{height:300px;padding:10px}.image-stage{position:relative;height:100%;display:flex;flex-direction:column;gap:8px}.preview{width:100%;height:236px;object-fit:contain;background:#040506;border:1px solid #2b3136}.upload-strip{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#11161a;border:1px solid #242a2f;padding:7px 8px}.file-name{font-size:11px;color:#7f8991;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.upload-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid #304453;background:#132434;color:#65c7ff;padding:7px 10px;border-radius:3px;font-size:12px;font-weight:700;cursor:pointer}.upload-btn:hover{filter:brightness(1.12)}.file-input{display:none}
+.result-content{height:300px;padding:10px}.result-box{height:100%;background:#020304;border:1px solid #2f353a;display:grid;place-items:center;position:relative;overflow:hidden}.result-box img{width:100%;height:100%;object-fit:contain}.empty-state{text-align:center;color:#778189;padding:20px}.empty-state .mini{font-size:12px;margin-bottom:7px;color:#a9b1b7}.empty-state .big{font-size:16px;font-weight:700;color:#d9dfe4;margin-bottom:5px}
+.metric-list,.assessment-list{display:grid;gap:4px}.metric,.assess{min-height:56px;border:1px solid #22282d;background:linear-gradient(180deg,#171b1f,#111519);display:grid;grid-template-columns:1.55fr .8fr;align-items:center;padding:8px 12px}.metric-label,.assess-label{font-size:13.5px;color:#e0e4e7}.metric-value,.assess-value{justify-self:end;font-size:23px;font-weight:800}.orange{color:var(--orange)}.green{color:var(--green)}.cyan{color:var(--cyan)}.red{color:var(--red)}
+.action-wrap{padding:8px 10px 10px;border:1px solid #252b30;background:#111518}.action-title{font-size:13px;color:#e0e4e7;margin-bottom:8px}.action-box{border:1px solid #ff4141;border-radius:7px;background:rgba(80,7,7,.2);padding:10px 12px;color:#ff4f4f;font-size:13.5px;line-height:1.35}
+.evidence-panel .heat-wrap{display:grid;grid-template-columns:1fr 62px;gap:9px}.evidence-img{width:100%;height:195px;object-fit:contain;background:#040506;border:1px solid #2d3338}.legend{display:flex;align-items:center;gap:8px}.bar{height:150px;width:15px;border:1px solid #34393d;background:linear-gradient(to top,#30350e,#a8a816,#ffe000,#ff7b00,#d20000)}.legend-text{height:150px;display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:#d2d8dc}.summary-title{color:var(--blue);font-size:15px;font-weight:800;margin:10px 0 7px;text-transform:uppercase}.summary{min-height:75px;background:#101518;border:1px solid #23292e;padding:10px 11px;color:#d5dade;font-size:13px;line-height:1.45}
+.status{margin-top:9px;font-size:12px;color:#9da8b0;min-height:17px}.status.ok{color:#59df77}.status.err{color:#ff6868}
+.footer{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px 12px;margin-top:8px;border:1px solid #2f363b;background:#101316}.btn{border:1px solid #353d44;background:#1a1f23;color:#e8ecef;padding:10px 16px;border-radius:4px;font-weight:700;cursor:pointer;min-height:40px}.btn:hover{filter:brightness(1.1)}.btn.primary{justify-self:start;border-color:#1f668e;background:#122534;color:#66c9ff}.btn.run{justify-self:center;min-width:230px;background:#202428}.btn.secondary{justify-self:end}.hidden{display:none!important}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);z-index:20}.modal{width:min(620px,calc(100vw - 32px));margin:18vh auto;background:#11171c;border:1px solid #36434c;box-shadow:0 30px 80px rgba(0,0,0,.65);padding:22px}.modal h2{margin:0;color:#25aaff;font-size:19px}.modal p{color:#aeb8c0}.progress{height:8px;background:#20272d;border-radius:4px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#1aaaff,#8d64ff);transition:width .25s}
+@media(max-width:1100px){.grid-top,.grid-mid{grid-template-columns:1fr 1fr}.result-card,.evidence-panel{grid-column:1/-1}}
+@media(max-width:720px){body{padding:0}.app{min-height:100vh;border:0}.sitebar{flex-wrap:wrap}.grid-top,.grid-mid{grid-template-columns:1fr}.result-card,.evidence-panel{grid-column:auto}.footer{grid-template-columns:1fr}.btn.primary,.btn.run,.btn.secondary{justify-self:stretch}.actions{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><span class="badge">V</span><span>VASUNETRA | FIELD ANALYSIS</span></div>
+    <div class="actions"><span>−</span><span>□</span><span>×</span></div>
+  </div>
+
+  <main>
+    <div class="sitebar">
+      <label>Assessment Site</label>
+      <select id="village"></select>
+      <span class="site-note">Use two photographs of the same location captured at different times and from a broadly similar viewpoint.</span>
+    </div>
+
+    <div class="grid-top">
+      <section class="card image-card">
+        <div class="card-title">1. BEFORE IMAGE</div>
+        <div class="content">
+          <div class="image-stage">
+            <img id="beforePreview" class="preview" alt="Before image preview">
+            <div class="upload-strip">
+              <span id="beforeName" class="file-name">No image selected</span>
+              <label class="upload-btn">📁 Choose Before Image<input id="before" class="file-input" type="file" accept="image/*"></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card image-card">
+        <div class="card-title">2. AFTER IMAGE</div>
+        <div class="content">
+          <div class="image-stage">
+            <img id="afterPreview" class="preview" alt="After image preview">
+            <div class="upload-strip">
+              <span id="afterName" class="file-name">No image selected</span>
+              <label class="upload-btn">📁 Choose After Image<input id="after" class="file-input" type="file" accept="image/*"></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card result-card">
+        <div class="card-title">CHANGE DETECTION RESULTS</div>
+        <div class="result-content">
+          <div id="changeResult" class="result-box">
+            <div class="empty-state"><div class="big">Waiting for analysis</div><div class="mini">Upload the Before and After photographs, then run Vasunetra analysis.</div><div class="mini">OpenCV alignment, change detection and evidence generation will appear here.</div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="grid-mid">
+      <section class="card">
+        <div class="card-title">CHANGE METRICS</div>
+        <div style="padding:10px">
+          <div class="metric-list">
+            <div class="metric"><span class="metric-label">↗ &nbsp;Total Change Detected</span><strong id="mChange" class="metric-value orange">—</strong></div>
+            <div class="metric"><span class="metric-label">▦ &nbsp;Significant Change Regions</span><strong id="mRegions" class="metric-value green">—</strong></div>
+            <div class="metric"><span class="metric-label">◎ &nbsp;Alignment Confidence</span><strong id="mAlign" class="metric-value cyan">—</strong></div>
+            <div class="metric"><span class="metric-label">⬡ &nbsp;Change Detection Confidence</span><strong id="mConf" class="metric-value cyan">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">HAZARD ASSESSMENT</div>
+        <div style="padding:10px">
+          <div class="assessment-list">
+            <div class="assess"><span class="assess-label">⚠ &nbsp;Hazard Priority</span><strong id="aPriority" class="assess-value red">—</strong></div>
+            <div class="assess"><span class="assess-label">◔ &nbsp;Risk Score</span><strong id="aScore" class="assess-value red">—</strong></div>
+            <div class="action-wrap"><div class="action-title">▤ &nbsp;Recommended Action</div><div id="aAction" class="action-box">Run an analysis to generate an actionable field assessment.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card evidence-panel">
+        <div class="card-title">CHANGE OVERLAY (HEATMAP)</div>
+        <div style="padding:10px">
+          <div class="heat-wrap">
+            <img id="heatmap" class="evidence-img" alt="Change heatmap">
+            <div class="legend"><div class="bar"></div><div class="legend-text"><span>High<br>Change</span><span>Low<br>Change</span></div></div>
+          </div>
+          <div class="summary-title">SUMMARY</div>
+          <div id="summary" class="summary">A significant-change summary will appear here after analysis. This is a prototype decision-support indicator and should be verified in the field.</div>
+        </div>
+      </section>
+    </div>
+
+    <div id="status" class="status">Ready. Select a village and upload the Before and After photographs.</div>
+
+    <div class="footer">
+      <button class="btn primary" onclick="location.href='/official/'">← Back to Dashboard</button>
+      <button id="runBtn" class="btn run" onclick="analyze()">↻ &nbsp; Run Analysis</button>
+      <button id="againBtn" class="btn secondary hidden" onclick="resetAnalysis()">↻ &nbsp; Run Another Analysis</button>
+    </div>
+  </main>
+</div>
+
+<div id="modal" class="modal-overlay"><div class="modal"><h2>Running Vasunetra Analysis</h2><p id="modalText">Checking image quality…</p><div class="progress"><div id="progressBar"></div></div></div></div>
+
+<script>
+const qs=id=>document.getElementById(id);
+const placeholder='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650"><rect width="1000" height="650" fill="#050709"/><text x="500" y="310" fill="#4d5860" text-anchor="middle" font-family="Arial" font-size="24">No image selected</text><text x="500" y="345" fill="#344047" text-anchor="middle" font-family="Arial" font-size="15">Choose an image to begin</text></svg>');
+qs('beforePreview').src=placeholder;qs('afterPreview').src=placeholder;qs('heatmap').src=placeholder;
+function status(msg,err=false){qs('status').textContent=msg;qs('status').className='status '+(err?'err':'')}
+function setPreview(input,img,nameId){const f=input.files[0];if(!f)return;img.src=URL.createObjectURL(f);qs(nameId).textContent=f.name;status('Image loaded: '+f.name);}
+qs('before').addEventListener('change',()=>setPreview(qs('before'),qs('beforePreview'),'beforeName'));
+qs('after').addEventListener('change',()=>setPreview(qs('after'),qs('afterPreview'),'afterName'));
+async function loadVillages(){
+  try{const r=await fetch('/api/villages');if(!r.ok)throw new Error('Could not load villages');const rows=await r.json();qs('village').innerHTML=rows.map(r=>`<option value="${r.village}">${String(r.village).replaceAll('_',' ')}</option>`).join('');}
+  catch(e){qs('village').innerHTML='<option value="">Backend unavailable</option>';status('⚠ '+e.message,true)}
+}
+function setLoading(on){qs('modal').style.display=on?'block':'none';qs('runBtn').disabled=on}
+function resetAnalysis(){location.reload()}
+function fmtPct(v){return Number(v||0).toFixed(2)+' %'}
+function classifyScore(score){return score>=0.70?'HIGH':score>=0.40?'MEDIUM':'LOW'}
+function scoreFromPayload(x){const vd=x.updated_village_data||{};if(vd.hazard_score!=null)return Number(vd.hazard_score)*100;return Math.min(100,Math.round(Number(x.change_percentage||0)*0.9+25))}
+function hazardAction(p){if(p==='HIGH')return 'Immediate field inspection required. High potential for slope instability and debris flow.';if(p==='MEDIUM')return 'Prioritize field verification and continue monitoring the affected location.';return 'Continue monitoring and reassess if new land disturbance is observed.'}
+function summaryText(c,conf,p,r){if(c<=0.01)return 'No substantial visible land change was detected between the supplied photographs. Treat this as low observed change, not proof that the site is hazard-free.';return `A ${c.toFixed(2)}% visible change was detected across ${r} significant region${r===1?'':'s'}. OpenCV evidence confidence is ${conf.toFixed(2)}%. This is a prototype decision-support indicator and should be verified in the field before relocation or emergency action.`}
+async function analyze(){
+  const b=qs('before').files[0],a=qs('after').files[0],v=qs('village').value;
+  if(!b||!a){status('⚠ Please choose both the Before and After images first.',true);return}
+  setLoading(true);qs('progressBar').style.width='12%';qs('modalText').textContent='Checking image quality…';
+  try{
+    await new Promise(r=>setTimeout(r,220));qs('progressBar').style.width='30%';qs('modalText').textContent='Aligning photographs with OpenCV…';
+    const fd=new FormData();fd.append('before',b);fd.append('after',a);fd.append('village',v);
+    const r=await fetch('/api/detect-change',{method:'POST',body:fd});const x=await r.json();if(!r.ok)throw new Error(x.detail||'Analysis failed');
+    qs('progressBar').style.width='72%';qs('modalText').textContent='Generating change mask, overlay and hazard assessment…';await new Promise(r=>setTimeout(r,220));
+    renderResult(x);qs('progressBar').style.width='100%';status('✓ Analysis complete. Evidence and village scoring were updated.');qs('runBtn').classList.add('hidden');qs('againBtn').classList.remove('hidden');
+  }catch(e){status('⚠ '+e.message,true)}finally{setLoading(false)}
+}
+function renderResult(x){
+  const files=x.files||{};const c=Number(x.change_percentage||0),conf=Number(x.confidence||0),align=Number(x.alignment_confidence||0),regions=Number(x.significant_regions||0);
+  qs('mChange').textContent=fmtPct(c);qs('mRegions').textContent=regions;qs('mAlign').textContent=fmtPct(align);qs('mConf').textContent=fmtPct(conf);
+  const hazardScore=scoreFromPayload(x);const priority=classifyScore(hazardScore/100);const vd=x.updated_village_data||{};
+  qs('aPriority').textContent=priority;qs('aPriority').className='assess-value '+(priority==='HIGH'?'red':priority==='MEDIUM'?'orange':'green');
+  qs('aScore').textContent=Math.round(hazardScore)+' / 100';
+  qs('aAction').textContent=vd.recommended_action||hazardAction(priority);
+  const mask=files.change_mask||files.change_regions||files.difference;
+  qs('changeResult').innerHTML=mask?`<img src="${mask}" alt="Detected change mask">`:'<div class="empty-state"><div class="big">Analysis completed</div><div class="mini">No change-mask image was returned by the engine.</div></div>';
+  qs('heatmap').src=files.heatmap||files.change_overlay||placeholder;
+  qs('summary').textContent=summaryText(c,conf,priority,regions);
+}
+loadVillages();
+</script>
+</body>
+</html>

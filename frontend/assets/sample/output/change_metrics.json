@@ -1,0 +1,184 @@
+{
+    "detected_change_percentage": 11.8623,
+    "significant_region_count": 10,
+    "largest_region": {
+        "id": 1,
+        "area_pixels": 790280,
+        "area_percentage": 6.3273,
+        "bounding_box": {
+            "x": 849,
+            "y": 465,
+            "width": 1491,
+            "height": 850
+        },
+        "centroid": {
+            "x": 1563.86,
+            "y": 806.2
+        },
+        "density": 0.6236
+    },
+    "confidence_score": 79.66,
+    "minimum_region_area": 5000,
+    "regions": [
+        {
+            "id": 1,
+            "area_pixels": 790280,
+            "area_percentage": 6.3273,
+            "bounding_box": {
+                "x": 849,
+                "y": 465,
+                "width": 1491,
+                "height": 850
+            },
+            "centroid": {
+                "x": 1563.86,
+                "y": 806.2
+            },
+            "density": 0.6236
+        },
+        {
+            "id": 2,
+            "area_pixels": 6925,
+            "area_percentage": 0.0554,
+            "bounding_box": {
+                "x": 1809,
+                "y": 1265,
+                "width": 235,
+                "height": 51
+            },
+            "centroid": {
+                "x": 1940.2,
+                "y": 1293.82
+            },
+            "density": 0.5778
+        },
+        {
+            "id": 3,
+            "area_pixels": 19464,
+            "area_percentage": 0.1558,
+            "bounding_box": {
+                "x": 2195,
+                "y": 1699,
+                "width": 122,
+                "height": 264
+            },
+            "centroid": {
+                "x": 2252.56,
+                "y": 1824.74
+            },
+            "density": 0.6043
+        },
+        {
+            "id": 4,
+            "area_pixels": 12685,
+            "area_percentage": 0.1016,
+            "bounding_box": {
+                "x": 982,
+                "y": 1705,
+                "width": 163,
+                "height": 126
+            },
+            "centroid": {
+                "x": 1056.42,
+                "y": 1754.57
+            },
+            "density": 0.6176
+        },
+        {
+            "id": 5,
+            "area_pixels": 10355,
+            "area_percentage": 0.0829,
+            "bounding_box": {
+                "x": 748,
+                "y": 1717,
+                "width": 183,
+                "height": 98
+            },
+            "centroid": {
+                "x": 851.34,
+                "y": 1774.97
+            },
+            "density": 0.5774
+        },
+        {
+            "id": 6,
+            "area_pixels": 29869,
+            "area_percentage": 0.2391,
+            "bounding_box": {
+                "x": 1710,
+                "y": 1801,
+                "width": 431,
+                "height": 186
+            },
+            "centroid": {
+                "x": 1943.03,
+                "y": 1895.07
+            },
+            "density": 0.3726
+        },
+        {
+            "id": 7,
+            "area_pixels": 8623,
+            "area_percentage": 0.069,
+            "bounding_box": {
+                "x": 694,
+                "y": 1853,
+                "width": 145,
+                "height": 126
+            },
+            "centroid": {
+                "x": 770.49,
+                "y": 1909.86
+            },
+            "density": 0.472
+        },
+        {
+            "id": 8,
+            "area_pixels": 15784,
+            "area_percentage": 0.1264,
+            "bounding_box": {
+                "x": 1807,
+                "y": 1988,
+                "width": 340,
+                "height": 77
+            },
+            "centroid": {
+                "x": 1968.66,
+                "y": 2028.46
+            },
+            "density": 0.6029
+        },
+        {
+            "id": 9,
+            "area_pixels": 15685,
+            "area_percentage": 0.1256,
+            "bounding_box": {
+                "x": 1007,
+                "y": 2006,
+                "width": 221,
+                "height": 114
+            },
+            "centroid": {
+                "x": 1107.57,
+                "y": 2061.26
+            },
+            "density": 0.6226
+        },
+        {
+            "id": 10,
+            "area_pixels": 571921,
+            "area_percentage": 4.5791,
+            "bounding_box": {
+                "x": 412,
+                "y": 2058,
+                "width": 1840,
+                "height": 624
+            },
+            "centroid": {
+                "x": 1443.71,
+                "y": 2399.69
+            },
+            "density": 0.4981
+        }
+    ]
+}

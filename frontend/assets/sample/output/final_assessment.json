@@ -1,0 +1,29 @@
+{
+    "project": "RedZone Sentinel",
+    "evidence": {
+        "land_change_percentage": 11.8623,
+        "change_confidence": 79.66,
+        "alignment_confidence": 55.9,
+        "significant_regions": 10
+    },
+    "site_assessment": {
+        "vulnerability": 70,
+        "carrying_capacity": 60,
+        "relocation_need": 65,
+        "field_verification": 40
+    },
+    "assessment": {
+        "hazard_score": 56.52,
+        "priority": "HIGH",
+        "recommended_action": "Prioritize field inspection, assess carrying capacity and prepare mitigation/relocation review",
+        "components": {
+            "change_score": 45,
+            "region_score": 30,
+            "evidence_score": 70.16,
+            "vulnerability_score": 70,
+            "carrying_capacity_score": 60,
+            "relocation_need_score": 65,
+            "field_verification_score": 40
+        }
+    }
+}

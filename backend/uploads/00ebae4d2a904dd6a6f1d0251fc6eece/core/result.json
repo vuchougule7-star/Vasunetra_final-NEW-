@@ -1,0 +1,59 @@
+{
+  "engine": "core",
+  "job_id": "00ebae4d2a904dd6a6f1d0251fc6eece",
+  "quality": {
+    "before": {
+      "sharpness": 1819.8,
+      "resolution": "468x484",
+      "usable": true,
+      "issues": []
+    },
+    "after": {
+      "sharpness": 1622.4,
+      "resolution": "463x487",
+      "usable": true,
+      "issues": []
+    }
+  },
+  "alignment": {
+    "feature_matches": 1836,
+    "good_matches": 247,
+    "inliers": 238,
+    "alignment_confidence": 96.4
+  },
+  "change": {
+    "total_area_px": 226512,
+    "changed_area_px": 37788,
+    "changed_area_pct": 16.68,
+    "significant_regions": 4,
+    "top_regions": [
+      {
+        "area_px": 32242,
+        "relative_pct": 14.23
+      },
+      {
+        "area_px": 3039,
+        "relative_pct": 1.34
+      },
+      {
+        "area_px": 729,
+        "relative_pct": 0.32
+      },
+      {
+        "area_px": 503,
+        "relative_pct": 0.22
+      }
+    ]
+  },
+  "evidence_confidence": {
+    "score": 96.4,
+    "label": "HIGH"
+  },
+  "files": {
+    "evidence": "/media/00ebae4d2a904dd6a6f1d0251fc6eece/core/evidence_report.jpg",
+    "aligned_after": "/media/00ebae4d2a904dd6a6f1d0251fc6eece/core/aligned_after.jpg",
+    "change_mask": "/media/00ebae4d2a904dd6a6f1d0251fc6eece/core/change_mask.jpg",
+    "change_overlay": "/media/00ebae4d2a904dd6a6f1d0251fc6eece/core/change_overlay.jpg",
+    "heatmap": "/media/00ebae4d2a904dd6a6f1d0251fc6eece/core/heatmap.jpg"
+  }
+}
