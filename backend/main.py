@@ -271,4 +271,4 @@ def get_reports():
 
 @app.get("/")
 def root():
-    return RedirectResponse(url="/official/", status_code=307)
+    return FileResponse(FRONTEND / "landing.html")

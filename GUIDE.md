@@ -69,7 +69,8 @@ The supplied Citizen Safety Dashboard design is retained:
 5. Start:
    `python run.py`
 6. Open:
-   - Official: `http://127.0.0.1:8000/`
+   - Landing page: `http://127.0.0.1:8000/`
+   - Official: `http://127.0.0.1:8000/official/`
    - Field Analysis: `http://127.0.0.1:8000/field/`
    - Citizen: `http://127.0.0.1:8000/citizen/`
    - API health: `http://127.0.0.1:8000/api/health`
