@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vasunetra | Disaster Risk Assessment</title>
+  <style>
+    :root {
+      --bg: #f4f7f6;
+      --navy: #0d253f;
+      --teal: #0d9488;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --red: #dc2626;
+      --amber: #d97706;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .emergency-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 24px;
+      background: var(--red);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .emergency-bar a { color: #fff; font-weight: 700; }
+    .emergency-contacts { display: flex; gap: 20px; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 40px;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand-logo {
+      display: grid;
+      width: 52px;
+      height: 52px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--teal);
+      font-size: 26px;
+      box-shadow: 0 4px 10px rgba(13, 148, 136, .3);
+    }
+    .brand-title {
+      color: var(--navy);
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      line-height: 1.1;
+    }
+    .brand-tagline {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .system-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid #bbf7d0;
+      border-radius: 20px;
+      background: #f0fdf4;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 45px 20px 25px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: #e6f4f1;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .hero h1 { margin-bottom: 12px; color: var(--navy); font-size: 38px; font-weight: 800; }
+    .hero p { color: var(--muted); font-size: 16px; line-height: 1.6; }
+
+    .portal-container {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto 50px;
+    }
+    .portal-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .03);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .portal-card:hover { transform: translateY(-6px); box-shadow: 0 16px 28px rgba(0, 0, 0, .08); }
+    .card-graphic-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 110px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .graphic-official { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); color: #0284c7; }
+    .graphic-field { background: linear-gradient(135deg, #fffbeb, #fef3c7); color: var(--amber); }
+    .graphic-citizen { background: linear-gradient(135deg, #f0fdf4, #dcfce7); color: #15803d; }
+    .graphic-icon { font-size: 40px; line-height: 1; }
+    .graphic-label { margin-top: 8px; font-size: 10px; font-weight: 700; letter-spacing: .5px; }
+    .card-title { margin-bottom: 8px; color: var(--navy); font-size: 22px; }
+    .card-desc { min-height: 63px; margin-bottom: 20px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .card-features { min-height: 116px; margin-bottom: 24px; list-style: none; }
+    .card-features li { display: flex; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+    .card-features li::before { content: "•"; color: var(--teal); font-size: 18px; font-weight: 700; line-height: 13px; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: filter .2s ease;
+    }
+    .btn:hover { filter: brightness(.9); }
+    .btn-official { background: var(--navy); }
+    .btn-field { background: var(--amber); }
+    .btn-citizen { background: var(--teal); }
+
+    .helpline-section { margin-top: auto; padding: 30px 20px; border-top: 1px solid var(--border); background: var(--card); }
+    .helpline-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+    .helpline-title { color: var(--navy); font-size: 16px; font-weight: 700; }
+    .helpline-subtitle { color: var(--muted); font-size: 13px; }
+    .helpline-numbers { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+    .pill-number { padding: 8px 16px; border: 1px solid var(--border); border-radius: 30px; background: var(--bg); font-size: 13px; font-weight: 600; }
+    .pill-number span { margin-left: 6px; color: var(--red); font-weight: 800; }
+    footer { padding: 20px; color: var(--muted); font-size: 12px; text-align: center; }
+
+    @media (max-width: 900px) {
+      .portal-container { grid-template-columns: 1fr; max-width: 560px; }
+      .card-desc, .card-features { min-height: 0; }
+      .helpline-content { align-items: flex-start; flex-direction: column; }
+      .helpline-numbers { justify-content: flex-start; }
+    }
+    @media (max-width: 620px) {
+      .emergency-bar, header { padding-right: 20px; padding-left: 20px; }
+      .emergency-bar, header { align-items: flex-start; flex-direction: column; }
+      .emergency-contacts { gap: 12px; }
+      .brand-title { font-size: 27px; }
+      .hero { padding-top: 32px; }
+      .hero h1 { font-size: 31px; }
+      .portal-container { width: min(100% - 28px, 560px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="emergency-bar">
+    <div>⚠️ <strong>NER Disaster Alert:</strong> Heavy rainfall predicted in Aizawl &amp; East Khasi Hills. Stay alert.</div>
+    <div class="emergency-contacts"><span>Emergency: <a href="tel:108">108</a> / <a href="tel:1070">1070</a></span></div>
+  </div>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo">🌏</div>
+      <div>
+        <div class="brand-title">VASUNETRA</div>
+        <div class="brand-tagline">The eye that watches earth before it moves</div>
+      </div>
+    </div>
+    <div class="system-status"><span class="status-dot"></span> System Live &amp; Operational</div>
+  </header>
+
+  <section class="hero">
+    <span class="hero-badge">Multi-Tenant Access Portal</span>
+    <h1>Select Access Role</h1>
+    <p>Unified disaster risk monitoring, ground assessment, and public safety routing for the North Eastern Region.</p>
+  </section>
+
+  <main class="portal-container">
+    <article class="portal-card">
+      <div>
+        <div class="card-graphic-preview graphic-official"><div class="graphic-icon">🏛️</div><div class="graphic-label">ADMINISTRATION HUB</div></div>
+        <h2 class="card-title">Official Dashboard</h2>
+        <p class="card-desc">For District Collectors, State Disaster Authorities, and administrative decision makers.</p>
+        <ul class="card-features">
+          <li>Village risk ranking and priority metrics</li>
+          <li>Carrying capacity and slope instability analysis</li>
+          <li>Relocation assessment decision support</li>
+          <li>Resource allocation and disaster oversight</li>
+        </ul>
+      </div>
+      <a href="./official/index.html" class="btn btn-official">Access Official Portal →</a>
+    </article>
+
+    <article class="portal-card">
+      <div>
+        <div class="card-graphic-preview graphic-field"><div class="graphic-icon">📋</div><div class="graphic-label">GROUND VERIFICATION</div></div>
+        <h2 class="card-title">Field Officer Portal</h2>
+        <p class="card-desc">For ground verification teams, SDRF/NDRF personnel, and local survey officers.</p>
+        <ul class="card-features">
+          <li>Ground truth survey and rapid verification</li>
+          <li>Real-time geotagged image upload</li>
+          <li>Shelter capacity and supply status logging</li>
+          <li>Offline-friendly field analysis workflow</li>
+        </ul>
+      </div>
+      <a href="./field/index.html" class="btn btn-field">Access Field Portal →</a>
+    </article>
+
+    <article class="portal-card">
+      <div>
+        <div class="card-graphic-preview graphic-citizen"><div class="graphic-icon">🛡️</div><div class="graphic-label">PUBLIC SAFETY ROUTING</div></div>
+        <h2 class="card-title">Citizen Safety Portal</h2>
+        <p class="card-desc">For local residents, travelers, and community members seeking real-time safety data.</p>
+        <ul class="card-features">
+          <li>Live neighborhood risk status indicator</li>
+          <li>Interactive map for nearby safe zones</li>
+          <li>Incident reporting and issue submission</li>
+          <li>Emergency alerts and safety information</li>
+        </ul>
+      </div>
+      <a href="./citizen/index.html" class="btn btn-citizen">Access Citizen Portal →</a>
+    </article>
+  </main>
+
+  <section class="helpline-section">
+    <div class="helpline-content">
+      <div>
+        <div class="helpline-title">24/7 Emergency Helpline Directory</div>
+        <div class="helpline-subtitle">Direct hotlines for disaster response teams across North Eastern States</div>
+      </div>
+      <div class="helpline-numbers">
+        <div class="pill-number">National Emergency: <span>112</span></div>
+        <div class="pill-number">Disaster Management: <span>1070</span></div>
+        <div class="pill-number">State Control Room: <span>1077</span></div>
+        <div class="pill-number">Ambulance: <span>108</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Vasunetra Decision Support System | Smart India Hackathon Project</footer>
+</body>
+</html>
